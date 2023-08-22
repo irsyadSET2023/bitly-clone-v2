@@ -17,7 +17,10 @@ async function register(req, res) {
   })
     .then(function (data) {
       console.log(data);
-      return res.status(200).json({ message: "Register", data });
+      return res.status(200).json({
+        message: "Register",
+        data: { id: data.id, username: data.userName, email: data.email },
+      });
     })
     .catch(function (error) {
       console.log(error);
@@ -37,23 +40,23 @@ async function login(req, res) {
   console.log(user);
 
   const generatAccessToken = (userData) => {
-    // console.log(config);
-    return jwt.sign(userData, config.jwtSecretToken, { expiresIn: "1800s" });
+    return jwt.sign(userData, config.jwtSecretToken, { expiresIn: "4800s" });
   };
 
   bcrypt.compare(password, user.password, (error, bcryptRes) => {
     if (bcryptRes) {
-      // req.session.auth = user.id;
       console.log("User Id", user.id);
       req.token = user.id;
       console.log("Token", req.token);
 
       const token = generatAccessToken({
         id: user.id,
+        username: user.userName,
+        email: user.email,
       });
       const serverRes = {
         message: "Login successful",
-        data: user,
+        data: { id: user.id, username: user.userName, email: user.email },
         jwt: token,
       };
       res.status(200).json(serverRes);

@@ -21,6 +21,7 @@ apiRoutes.post(
 apiRoutes.post("/login", loginValidator, validate, authController.login);
 apiRoutes.post("/logout", isAuthenticated, authController.logout);
 
+apiRoutes.get("/link", linkController.getAllLink);
 apiRoutes.post(
   "/link",
   isAuthenticated,
@@ -35,6 +36,7 @@ apiRoutes.put(
   validate,
   linkController.update
 );
+
 apiRoutes.get("/link/:userId", linkController.listAllbyUserId);
 apiRoutes.delete("/link", isAuthenticated, linkController.deleteLink);
 

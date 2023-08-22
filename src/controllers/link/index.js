@@ -1,6 +1,18 @@
 import { Op } from "sequelize";
 import Link from "../../database/model/Link";
 
+async function getAllLink(req, res) {
+  await Link.findAll()
+    .then(function (data) {
+      console.log(data);
+      res.status(200).json({ message: "All links", data });
+    })
+    .catch(function (error) {
+      console.log(error);
+      res.status(500).json({ error });
+    });
+}
+
 async function create(req, res) {
   const { link } = req.body;
   const owner = req.user.id;
@@ -94,6 +106,7 @@ async function redirect(req, res) {
 }
 
 const linkController = {
+  getAllLink,
   create,
   update,
   listAllbyUserId,
