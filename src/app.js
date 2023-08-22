@@ -24,6 +24,7 @@ app.use(helmet());
 app.use(morgan("tiny"));
 
 if (config.nodeEnv !== "test") {
+  console.log(config.no);
   dbInit();
 }
 

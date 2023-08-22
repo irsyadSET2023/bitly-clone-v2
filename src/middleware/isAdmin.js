@@ -8,6 +8,7 @@ async function isAdmin(req, res, next) {
   const data = await User.findOne({
     where: { id: req.user.id },
   });
+
   const user = data.rows[0];
   if (user.is_admin) {
     next();

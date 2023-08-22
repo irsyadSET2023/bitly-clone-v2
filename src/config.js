@@ -25,7 +25,7 @@ const config = {
 
   clientOrigins: {
     development: process.env["DEV_ORIGIN"] ?? "*",
-    production: process.env["PROD_ORIGIN"] ?? "none",
+    production: process.env["PROD_ORIGIN"] ?? "*",
   },
 };
 
