@@ -9,7 +9,8 @@ import root from "./routes/root";
 import dbInit from "./database/init";
 import apiRoutes from "./routes/api";
 import session from "express-session";
-
+import dotenv from "dotenv";
+dotenv.config();
 const app = express();
 
 // Apply most middleware first
@@ -23,8 +24,9 @@ app.use(
 app.use(helmet());
 app.use(morgan("tiny"));
 
+console.log(process.env["PROD_ORIGIN"]);
+
 if (config.nodeEnv !== "test") {
-  console.log(config.no);
   dbInit();
 }
 
