@@ -43,10 +43,10 @@ async function update(req, res) {
 }
 
 async function listAllbyUserId(req, res) {
-  const userId = req.params.userId;
-
+  const userId = req.user.id;
+  console.log("User Id", userId);
   await Link.findAndCountAll({
-    attributes: ["slug", "link", "visit_counts"],
+    attributes: ["slug", "link", "visit_counts", "created_at"],
     order: [["created_at", "ASC"]],
     where: { owner: userId },
   })

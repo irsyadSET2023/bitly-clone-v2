@@ -21,7 +21,7 @@ apiRoutes.post(
 apiRoutes.post("/login", loginValidator, validate, authController.login);
 apiRoutes.post("/logout", isAuthenticated, authController.logout);
 
-apiRoutes.get("/link", linkController.getAllLink);
+// apiRoutes.get("/link", linkController.getAllLink);
 apiRoutes.post(
   "/link",
   isAuthenticated,
@@ -37,7 +37,7 @@ apiRoutes.put(
   linkController.update
 );
 
-apiRoutes.get("/link/:userId", linkController.listAllbyUserId);
+apiRoutes.get("/link", isAuthenticated, linkController.listAllbyUserId);
 apiRoutes.delete("/link", isAuthenticated, linkController.deleteLink);
 
 apiRoutes.get("/protected", isAuthenticated, function (req, res) {
